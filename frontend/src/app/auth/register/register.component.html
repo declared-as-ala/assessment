@@ -1,0 +1,76 @@
+<div class="auth-container">
+  <div class="auth-card card">
+    <h1 class="text-center mb-3">Create Account</h1>
+    <p class="text-center mb-3" style="color: #718096;">Join the chess community</p>
+
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="displayName">Display Name</label>
+        <input
+          type="text"
+          id="displayName"
+          name="displayName"
+          [(ngModel)]="credentials.displayName"
+          placeholder="Your name"
+          required
+          [disabled]="loading()"
+        />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="credentials.email"
+          placeholder="your@email.com"
+          required
+          [disabled]="loading()"
+        />
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="credentials.password"
+          placeholder="At least 8 characters"
+          required
+          [disabled]="loading()"
+        />
+      </div>
+
+      @if (error()) {
+        <div class="error">{{ error() }}</div>
+      }
+
+      <button
+        type="submit"
+        class="btn-primary"
+        style="width: 100%;"
+        [disabled]="loading()"
+      >
+        @if (loading()) {
+          <span>Creating account...</span>
+        } @else {
+          <span>Sign Up</span>
+        }
+      </button>
+    </form>
+
+    <div class="text-center mt-3">
+      <p style="color: #718096;">
+        Already have an account?
+        <a routerLink="/auth/login" style="color: #667eea; text-decoration: none; font-weight: 600;">
+          Sign in
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+

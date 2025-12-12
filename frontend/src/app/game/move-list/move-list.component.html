@@ -1,0 +1,24 @@
+<div class="card move-list-card">
+  <h3 class="mb-2">Moves</h3>
+  
+  @if (moves.length === 0) {
+    <p class="empty-message">No moves yet</p>
+  } @else {
+    <div class="moves-container">
+      @for (pair of movePairs(); track pair.moveNumber) {
+        <div class="move-row">
+          <div class="move-number">{{ pair.moveNumber }}.</div>
+          @if (pair.white) {
+            <div class="move-item white">{{ pair.white.san }}</div>
+          }
+          @if (pair.black) {
+            <div class="move-item black">{{ pair.black.san }}</div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>
+
+
+

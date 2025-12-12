@@ -1,0 +1,29 @@
+<div class="chess-board">
+  @for (row of board(); track $index) {
+    <div class="board-row">
+      @for (square of row; track square.coordinate) {
+        <div
+          class="square"
+          [class.light]="square.color === 'light'"
+          [class.dark]="square.color === 'dark'"
+          [class.selected]="isSquareSelected(square.coordinate)"
+          [class.valid-move]="isValidMoveSquare(square.coordinate)"
+          [class.clickable]="isPlayerTurn()"
+          (click)="onSquareClick(square.coordinate)"
+        >
+          @if (square.piece) {
+            <div class="piece" [class.white]="square.piece === square.piece.toUpperCase()">
+              {{ getPieceSymbol(square.piece) }}
+            </div>
+          }
+          @if (isValidMoveSquare(square.coordinate)) {
+            <div class="valid-move-indicator" [class.capture]="square.piece"></div>
+          }
+          <div class="coordinate-label">{{ square.coordinate }}</div>
+        </div>
+      }
+    </div>
+  }
+</div>
+
+

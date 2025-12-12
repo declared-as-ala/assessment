@@ -1,0 +1,74 @@
+.move-list-card {
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.moves-container {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.move-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.move-row:last-child {
+  border-bottom: none;
+}
+
+.move-number {
+  font-weight: 600;
+  color: #718096;
+  text-align: right;
+  padding-right: 4px;
+}
+
+.move-item {
+  padding: 4px 8px;
+  background: #f7fafc;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  text-align: center;
+}
+
+.move-item.white {
+  color: #2d3748;
+}
+
+.move-item.black {
+  color: #4a5568;
+}
+
+.empty-message {
+  text-align: center;
+  color: #718096;
+  padding: 20px;
+}
+
+/* Scrollbar styling */
+.moves-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.moves-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.moves-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.moves-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+

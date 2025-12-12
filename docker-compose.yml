@@ -1,0 +1,61 @@
+services:
+  # PostgreSQL database (optional, H2 is used by default)
+  postgres:
+    image: postgres:15-alpine
+    container_name: chess-postgres
+    environment:
+      POSTGRES_DB: chessdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - chess-network
+    profiles:
+      - postgres
+
+  # Backend Spring Boot application
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chess-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      # Uncomment below to use PostgreSQL
+      # - SPRING_PROFILES_ACTIVE=postgres
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/chessdb
+      # - SPRING_DATASOURCE_USERNAME=postgres
+      # - SPRING_DATASOURCE_PASSWORD=postgres
+    volumes:
+      - ./data:/app/data
+    networks:
+      - chess-network
+    # depends_on:
+    #   - postgres  # Only needed if using PostgreSQL profile
+
+  # Frontend Angular application
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: chess-frontend
+    ports:
+      - "4200:80"
+    networks:
+      - chess-network
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+
+networks:
+  chess-network:
+    driver: bridge
+
+
